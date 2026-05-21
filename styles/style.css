@@ -1,0 +1,942 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    --light-bg:
+        radial-gradient(circle at top left,
+            rgba(255, 214, 228, .95),
+            transparent 35%),
+
+        radial-gradient(circle at bottom right,
+            rgba(255, 190, 220, .85),
+            transparent 40%),
+
+        linear-gradient(135deg,
+            #fffdfb 0%,
+            #fff6f8 35%,
+            #ffeef4 70%,
+            #ffe3ed 100%);
+
+    --pink-bg:
+        radial-gradient(circle at top left,
+            rgba(255, 255, 255, .22),
+            transparent 30%),
+
+        radial-gradient(circle at bottom right,
+            rgba(255, 182, 220, .32),
+            transparent 35%),
+
+        linear-gradient(135deg,
+            #ff8cbc 0%,
+            #ff6eab 40%,
+            #ff4d98 75%,
+            #ff267f 100%);
+
+    --glass-light:
+        rgba(255, 255, 255, .28);
+
+    --glass-dark:
+        rgba(255, 255, 255, .1);
+}
+
+/* =========================
+   BASE
+========================= */
+
+html,
+body {
+
+    width: 100%;
+    min-height: 100%;
+
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family: 'Cairo', sans-serif;
+
+    background: var(--light-bg);
+
+    transition: background 1s ease;
+
+    position: relative;
+
+    text-align: center;
+
+    color: #222;
+}
+
+body.pink-mode {
+
+    background: var(--pink-bg);
+}
+
+/* =========================
+   NOISE
+========================= */
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background-image:
+        url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+
+    opacity: .12;
+
+    mix-blend-mode: soft-light;
+
+    pointer-events: none;
+
+    z-index: -2;
+}
+
+/* =========================
+   LIGHT OVERLAY
+========================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at center,
+            rgba(255, 255, 255, .28),
+            transparent 60%);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+/* =========================
+   FLOATING LIGHTS
+========================= */
+
+.light {
+
+    position: fixed;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    opacity: .5;
+
+    animation: blob 12s infinite alternate ease-in-out;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+.light1 {
+
+    width: 400px;
+    height: 400px;
+
+    background: #ffc4dc;
+
+    top: -140px;
+    left: -140px;
+}
+
+.light2 {
+
+    width: 320px;
+    height: 320px;
+
+    background: #ff8bbb;
+
+    bottom: -100px;
+    right: -100px;
+
+    animation-delay: 2s;
+}
+
+@keyframes blob {
+
+    0% {
+
+        transform:
+            translate(0, 0) scale(1);
+    }
+
+    100% {
+
+        transform:
+            translate(70px, -40px) scale(1.2);
+    }
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+#particles {
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 1;
+}
+
+.particle {
+
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .8);
+
+    animation: sparkle linear infinite;
+}
+
+@keyframes sparkle {
+
+    0% {
+
+        transform:
+            translateY(0) scale(0);
+
+        opacity: 0;
+    }
+
+    20% {
+
+        opacity: 1;
+
+        transform: scale(1);
+    }
+
+    100% {
+
+        transform:
+            translateY(-120vh) scale(0);
+
+        opacity: 0;
+    }
+}
+
+/* =========================
+   THEME SWITCH
+========================= */
+
+.theme-switch {
+
+    position: fixed;
+
+    top: 24px;
+    left: 24px;
+
+    width: 84px;
+    height: 42px;
+
+    border-radius: 999px;
+
+    z-index: 99999;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(20px);
+
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, .65),
+            rgba(255, 255, 255, .18));
+
+    border: 1px solid rgba(255, 255, 255, .45);
+
+    box-shadow:
+        0 12px 35px rgba(255, 105, 180, .18);
+
+    transition: .5s ease;
+}
+
+body.pink-mode .theme-switch {
+
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, .18),
+            rgba(255, 255, 255, .08));
+}
+
+.switch-circle {
+
+    position: absolute;
+
+    top: 4px;
+    left: 4px;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px;
+
+    background:
+        linear-gradient(135deg,
+            #ffffff,
+            #ffe2ef);
+
+    transition: .5s cubic-bezier(.68, -.6, .32, 1.6);
+
+    box-shadow:
+        0 8px 18px rgba(255, 105, 180, .3);
+}
+
+body.pink-mode .switch-circle {
+
+    left: calc(100% - 38px);
+
+    background:
+        linear-gradient(135deg,
+            #ff8ec0,
+            #ff3c8d);
+
+    color: white;
+}
+
+.switch-icons {
+
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 12px;
+
+    font-size: 12px;
+
+    pointer-events: none;
+}
+
+/* =========================
+   FIRST SCREEN
+========================= */
+.scene {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    overflow: hidden;
+
+    perspective: 2000px;
+    transition: 1s ease;
+    padding: 0;
+
+    z-index: 2;
+}
+
+.bg-video{
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    z-index: -10;
+}
+
+/* =========================
+   TOP TEXT (IOS SAFE TYPE REVEAL)
+========================= */
+
+.top-text{
+
+    position:relative;
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:clamp(24px,3vw,42px);
+
+    font-weight:600;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    color:#ff4f97;
+
+    white-space:nowrap;
+
+    display:inline-block;
+
+    overflow:hidden;
+
+    /* 👇 بدل width animation استخدم clip-path */
+    clip-path: inset(0 100% 0 0);
+
+    animation: reveal 3.5s ease forwards;
+
+    text-shadow:
+        0 4px 10px rgba(255,255,255,.7),
+        0 10px 25px rgba(255,105,180,.28),
+        0 18px 50px rgba(255,105,180,.18);
+
+    will-change: clip-path;
+}
+
+/* =========================
+   REVEAL ANIMATION (LEFT → RIGHT)
+========================= */
+
+@keyframes reveal{
+
+    from{
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to{
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* =========================
+   CURSOR (OPTIONAL)
+========================= */
+
+.top-text::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-6px;
+    top:0;
+
+    width:2px;
+    height:100%;
+
+    background:rgba(255,255,255,.9);
+
+    animation:blink .8s infinite;
+}
+
+@keyframes blink{
+
+    50%{
+        opacity:0;
+    }
+}
+
+/* =========================
+   SHINE EFFECT (LIGHT + IOS SAFE)
+========================= */
+
+.top-text::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:50%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.6),
+            transparent
+        );
+
+    transform:skewX(-25deg);
+
+    animation:shine 3s linear infinite;
+}
+
+/* 🚨 Disable shine on iPhone (performance fix) */
+@supports (-webkit-touch-callout: none) {
+    .top-text::before {
+        display:none;
+    }
+}
+
+/* =========================
+   SHINE MOVE
+========================= */
+
+@keyframes shine{
+
+    100%{
+        left:180%;
+    }
+}
+
+/* =========================
+   PINK MODE
+========================= */
+
+body.pink-mode .top-text{
+
+    color:#fff;
+
+    text-shadow:
+        0 4px 10px rgba(255,255,255,.3),
+        0 10px 30px rgba(255,255,255,.2),
+        0 18px 55px rgba(255,255,255,.12);
+}
+/* =========================
+   BOTTOM TEXT - CLASSIC ELEGANT
+========================= */
+
+.bottom-text{
+    position:relative;
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(20px,2.2vw,32px);
+    font-weight:600;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#3b2a23;
+    text-align:center;
+    opacity:1;
+    transform:translateY(0);
+    transition:1s ease;
+}
+
+/* دخول ناعم */
+
+@keyframes bottomIn{
+
+    0%{
+
+        opacity:0;
+        transform:translateY(35px);
+        filter:blur(6px);
+    }
+
+    100%{
+
+        opacity:1;
+        transform:translateY(0);
+        filter:blur(0);
+    }
+}
+
+/* خط بسيط تحت النص */
+
+.bottom-text::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-6px;
+
+    transform:translateX(-50%);
+
+    width:60%;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #3b2a23,
+            transparent
+        );
+
+    opacity:.6;
+}
+
+/* hover بسيط */
+
+.bottom-text:hover{
+
+    letter-spacing:5px;
+    transform:translateY(-2px);
+    transition:.4s ease;
+}
+
+/* موبايل */
+
+@media(max-width:768px){
+
+    .bottom-text{
+
+        font-size:18px;
+        letter-spacing:3px;
+    }
+}
+/* =========================
+   ENVELOPE GLOW
+========================= */
+
+.envelope::before {
+
+    content: "";
+
+    position: absolute;
+    inset: -70px;
+
+    background:
+        radial-gradient(circle,
+            rgba(255, 90, 160, .4),
+            transparent 65%);
+
+    filter: blur(55px);
+
+    z-index: -1;
+
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+        opacity: .7;
+    }
+
+    50% {
+
+        transform: scale(1.18);
+
+        opacity: 1;
+    }
+}
+
+/* =========================
+   MAIN IMAGE
+========================= */
+
+.main-img {
+
+    width: 100%;
+
+    display: block;
+
+    border-radius: 38px;
+
+    border: 1px solid rgba(255, 255, 255, .4);
+
+    box-shadow:
+        0 35px 120px rgba(255, 105, 180, .3);
+}
+
+/* =========================
+   SHINE
+========================= */
+
+.shine {
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 60%;
+    height: 100%;
+
+    background:
+        linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, .55),
+            transparent);
+
+    transform: skewX(-25deg);
+
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+
+    100% {
+
+        left: 170%;
+    }
+}
+
+/* =========================
+   FLASH
+========================= */
+
+.open-flash {
+
+    position: absolute;
+    inset: 0;
+
+    border-radius: 38px;
+
+    background:
+        radial-gradient(circle,
+            rgba(255, 255, 255, .8),
+            transparent 60%);
+
+    opacity: 0;
+}
+
+/* =========================
+   OPEN BUTTON
+========================= */
+
+.open-btn {
+
+    position: absolute;
+
+    top: 50%;
+    left: 49%;
+
+    transform: translate(-50%, -50%);
+
+    width: clamp(110px, 24vw, 180px);
+
+    z-index: 5;
+
+    transition: .4s ease;
+
+    filter:
+        drop-shadow(0 15px 30px rgba(255, 105, 180, .5));
+}
+
+.open-btn:hover {
+
+    transform:
+        translate(-50%, -50%) scale(1.1);
+}
+
+/* =========================
+   HINT TEXT
+========================= */
+
+.hint-text {
+
+    position: absolute;
+
+    top: calc(50% + 76px);
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: white;
+
+    font-size: 15px;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 4px 14px rgba(0, 0, 0, .25);
+}
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.main {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    position: relative;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: scale(1.05);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease,
+        visibility 1s ease;
+}
+
+.main.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform: scale(1);
+}
+
+
+/* =========================
+   FLOAT MUSIC PLAYER
+========================= */
+
+.music-player{
+
+    position:fixed;
+
+    bottom:25px;
+    left:25px;
+
+    z-index:99999;
+}
+/* BUTTON */
+
+#musicBtn{
+
+    width:68px;
+    height:68px;
+
+    border:none;
+    outline:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.22),
+            rgba(255,255,255,.06)
+        );
+
+    backdrop-filter:blur(20px);
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.35),
+        inset 0 1px 1px rgba(255,255,255,.18);
+
+    transition:.4s ease;
+}
+
+/* hover */
+
+#musicBtn:hover{
+
+    transform:
+        translateY(-4px)
+        scale(1.06);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.45),
+        0 0 25px rgba(255,255,255,.08);
+}
+
+/* disc */
+
+.music-disc{
+
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #ff7aa2,
+            #ff4d6d
+        );
+
+    color:#fff;
+
+    font-size:20px;
+
+    box-shadow:
+        0 0 22px rgba(255,80,120,.45);
+}
+
+/* playing */
+
+#musicBtn.playing .music-disc{
+
+    animation:discSpin 4s linear infinite;
+}
+
+/* spin */
+
+@keyframes discSpin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* mobile */
+
+@media(max-width:768px){
+
+    .music-player{
+
+        bottom:18px;
+        left:18px;
+        right:auto;
+    }
+
+    #musicBtn{
+
+        width:60px;
+        height:60px;
+    }
+
+    .music-disc{
+
+        width:46px;
+        height:46px;
+
+        font-size:17px;
+    }
+}
+
+

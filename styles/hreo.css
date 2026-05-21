@@ -1,0 +1,274 @@
+.hero{
+    min-height:100vh;
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    padding:0 20px;
+
+    isolation:isolate;
+
+ 
+}
+
+/* 🎥 video background */
+.hero-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+
+    filter: brightness(.7) contrast(1.15) saturate(1.25);
+    transform: scale(1);
+}
+
+/* 🌑 overlay */
+.overlay{
+    position:absolute;
+    inset:0;
+   background:
+    radial-gradient(circle at center,
+        rgba(255, 182, 193, .25),   /* baby pink خفيف في النص */
+        rgba(255, 105, 180, .45)); /* وردي أغمق شوية */
+    z-index:1;
+}
+
+/* 💖 hearts */
+.hearts{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+}
+
+.hearts span{
+    position:absolute;
+    bottom:-40px;
+    font-size:18px;
+    color:#ff4d6d;
+    opacity:.8;
+    filter: drop-shadow(0 0 8px rgba(255,50,80,.5));
+    animation:floatHearts linear infinite;
+}
+
+/* content */
+.hero-content{
+    position:relative;
+    z-index:3;
+    max-width:850px;
+    padding:30px;
+
+    animation: contentReveal 1.6s ease forwards;
+}
+
+/* 💎 AYAH */
+.ayah {
+    font-size: 30px;
+    color: #ffffff;
+
+    margin-bottom: 12px;
+    line-height: 1.9;
+
+    font-family: 'Amiri', serif;
+
+   
+
+    animation: textPop .9s ease forwards;
+}
+
+/* ✨ TAGLINE */
+.tagline{
+    letter-spacing:5px;
+    color:#f5d08a;
+    font-size:13px;
+
+    margin-bottom:12px;
+    text-transform:uppercase;
+
+    font-family:'Poppins', sans-serif;
+
+    opacity:.95;
+
+    text-shadow:
+        0 2px 0 #6b4e16,
+        0 10px 20px rgba(0,0,0,.4);
+
+    animation: textPop 1.1s ease forwards;
+}
+
+/* 💍 NAMES */
+.names{
+    font-size:clamp(58px,10vw,92px);
+
+    font-family:'Great Vibes', cursive;
+
+    color:#ffffff;
+
+    margin:12px 0;
+
+    letter-spacing:.5px;
+
+    line-height:1.15;
+
+    position:relative;
+
+    /* تحسين الرندر */
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+
+    text-rendering:optimizeLegibility;
+
+    /* Shadow أخف وأنضف */
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.25),
+        0 6px 18px rgba(0,0,0,.35),
+        0 0 25px rgba(255,60,90,.18);
+
+    /* بدل rotateX الثقيل */
+    transform:translateZ(0);
+
+    backface-visibility:hidden;
+
+    will-change:transform;
+
+    animation:nameReveal 1.2s ease forwards;
+}
+/* & */
+.spans{
+    color:#f5d08a;
+    margin:0 10px;
+    font-size:1.1em;
+
+    text-shadow: 0 5px 15px rgba(0,0,0,.5);
+}
+
+/* text */
+.small-text{
+    font-size:34px;
+    font-family:'Great Vibes', cursive;
+
+    color:#ffe4b5;
+
+    line-height:1.7;
+
+    margin-bottom:14px;
+
+    text-shadow:
+        0 2px 0 #7a5a2a,
+        0 10px 25px rgba(0,0,0,.5);
+
+    animation: textPop 1.3s ease forwards;
+}
+
+/* date */
+.date-box{
+    display:inline-block;
+    margin-top:14px;
+
+    font-family:'Great Vibes', cursive;
+
+    padding:10px 26px;
+
+    border-radius:40px;
+
+    color:#ffe8b3;
+
+    font-size:30px;
+
+    background: rgba(0,0,0,.35);
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.4),
+        0 0 20px rgba(255,60,90,.2);
+
+    animation: textPop 1.5s ease forwards;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes floatHearts{
+    from{
+        transform:translateY(0) scale(.8);
+        opacity:0;
+    }
+    20%{opacity:.8;}
+    to{
+        transform:translateY(-110vh) scale(1.2);
+        opacity:0;
+    }
+}
+
+/* دخول عام */
+@keyframes contentReveal{
+    from{
+        opacity:0;
+        transform: translateY(40px) scale(.95);
+        filter: blur(8px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* نصوص */
+@keyframes textPop{
+    from{
+        opacity:0;
+        transform: translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+/* أسماء 3D دخول */
+@keyframes nameReveal{
+    from{
+        opacity:0;
+        transform: perspective(800px) rotateX(40deg) translateY(60px);
+        filter: blur(10px);
+    }
+    to{
+        opacity:1;
+        transform: perspective(800px) rotateX(10deg) translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* mobile */
+@media(max-width:768px){
+
+    .names{
+        font-size:54px;
+    }
+
+    .small-text{
+        font-size:18px;
+    }
+
+    .date-box{
+        font-size:20px;
+        padding:8px 18px;
+    }
+
+    .ayah{
+        font-size:19px;
+    }
+}
+
+
