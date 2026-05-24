@@ -40,7 +40,6 @@
         rgba(255, 105, 180, .45)); /* وردي أغمق شوية */
     z-index:1;
 }
-
 /* 💖 hearts */
 .hearts{
     position:absolute;
@@ -58,57 +57,85 @@
     filter: drop-shadow(0 0 8px rgba(255,50,80,.5));
     animation:floatHearts linear infinite;
 }
+/* =========================
+   HERO CONTENT
+========================= */
 
-/* content */
 .hero-content{
     position:relative;
     z-index:3;
-    max-width:850px;
-    padding:30px;
 
-    animation: contentReveal 1.6s ease forwards;
+    max-width:850px;
+
+    padding:30px;
 }
 
-/* 💎 AYAH */
+/* =========================
+   ELEMENTS DEFAULT STATE
+========================= */
+
+.ayah,
+.tagline,
+.names,
+.small-text,
+.date-box{
+
+    opacity:0;
+}
+
+/* =========================
+   AYAH
+========================= */
+
 .ayah {
+
     font-size: 30px;
-    color: #ffffff;
+
+    color: #000000;
 
     margin-bottom: 12px;
+
     line-height: 1.9;
 
+    font-weight: 900;
+
     font-family: 'Amiri', serif;
-
-   
-
-    animation: textPop .9s ease forwards;
 }
 
-/* ✨ TAGLINE */
+/* =========================
+   TAGLINE
+========================= */
+
 .tagline{
+
     letter-spacing:5px;
-    color:#f5d08a;
+
+    color:#e29608;
+
     font-size:13px;
 
     margin-bottom:12px;
+
     text-transform:uppercase;
 
     font-family:'Poppins', sans-serif;
 
-    opacity:.95;
-
     text-shadow:
         0 2px 0 #6b4e16,
         0 10px 20px rgba(0,0,0,.4);
-
-    animation: textPop 1.1s ease forwards;
 }
 
-/* 💍 NAMES */
+/* =========================
+   NAMES
+========================= */
+
 .names{
+
     font-size:clamp(58px,10vw,92px);
 
     font-family:'Great Vibes', cursive;
+
+    text-transform: capitalize;
 
     color:#ffffff;
 
@@ -120,39 +147,38 @@
 
     position:relative;
 
-    /* تحسين الرندر */
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
 
     text-rendering:optimizeLegibility;
 
-    /* Shadow أخف وأنضف */
     text-shadow:
         0 2px 4px rgba(0,0,0,.25),
         0 6px 18px rgba(0,0,0,.35),
         0 0 25px rgba(255,60,90,.18);
-
-    /* بدل rotateX الثقيل */
-    transform:translateZ(0);
-
-    backface-visibility:hidden;
-
-    will-change:transform;
-
-    animation:nameReveal 1.2s ease forwards;
 }
+
 /* & */
 .spans{
+
     color:#f5d08a;
+
     margin:0 10px;
+
     font-size:1.1em;
 
-    text-shadow: 0 5px 15px rgba(0,0,0,.5);
+    text-shadow:
+        0 5px 15px rgba(0,0,0,.5);
 }
 
-/* text */
+/* =========================
+   SMALL TEXT
+========================= */
+
 .small-text{
+
     font-size:34px;
+
     font-family:'Great Vibes', cursive;
 
     color:#ffe4b5;
@@ -164,13 +190,16 @@
     text-shadow:
         0 2px 0 #7a5a2a,
         0 10px 25px rgba(0,0,0,.5);
-
-    animation: textPop 1.3s ease forwards;
 }
 
-/* date */
+/* =========================
+   DATE BOX
+========================= */
+
 .date-box{
+
     display:inline-block;
+
     margin-top:14px;
 
     font-family:'Great Vibes', cursive;
@@ -192,65 +221,124 @@
     box-shadow:
         0 10px 30px rgba(0,0,0,.4),
         0 0 20px rgba(255,60,90,.2);
-
-    animation: textPop 1.5s ease forwards;
 }
 
-/* ================= ANIMATIONS ================= */
+/* =========================
+   ULTRA SLOW START ANIMATIONS
+========================= */
 
-@keyframes floatHearts{
-    from{
-        transform:translateY(0) scale(.8);
-        opacity:0;
-    }
-    20%{opacity:.8;}
-    to{
-        transform:translateY(-110vh) scale(1.2);
-        opacity:0;
-    }
+.main.show .ayah{
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:.6s;
 }
 
-/* دخول عام */
-@keyframes contentReveal{
+.main.show .tagline{
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:1.2s;
+}
+
+.main.show .names{
+
+    animation:
+        fadeUpLuxury 2.8s ease forwards;
+}
+
+/* names delays */
+
+.main.show .names:nth-of-type(1){
+    animation-delay:1.8s;
+}
+
+.main.show .names:nth-of-type(2){
+    animation-delay:2.6s;
+}
+
+.main.show .names:nth-of-type(3){
+    animation-delay:3.4s;
+}
+
+.main.show .small-text{
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:4.2s;
+}
+
+.main.show .date-box{
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:5s;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+/* Soft Fade Up */
+
+@keyframes fadeUp{
+
     from{
+
         opacity:0;
-        transform: translateY(40px) scale(.95);
-        filter: blur(8px);
+
+        transform:
+            translateY(80px);
+
+        filter:blur(8px);
     }
+
     to{
+
         opacity:1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
+
+        transform:
+            translateY(0);
+
+        filter:blur(0);
     }
 }
 
-/* نصوص */
-@keyframes textPop{
+/* Luxury Names */
+
+@keyframes fadeUpLuxury{
+
     from{
+
         opacity:0;
-        transform: translateY(25px);
+
+        transform:
+            translateY(120px)
+            scale(.92);
+
+        filter:blur(12px);
     }
+
     to{
+
         opacity:1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:blur(0);
     }
 }
 
-/* أسماء 3D دخول */
-@keyframes nameReveal{
-    from{
-        opacity:0;
-        transform: perspective(800px) rotateX(40deg) translateY(60px);
-        filter: blur(10px);
-    }
-    to{
-        opacity:1;
-        transform: perspective(800px) rotateX(10deg) translateY(0);
-        filter: blur(0);
-    }
-}
+/* =========================
+   MOBILE
+========================= */
 
-/* mobile */
 @media(max-width:768px){
 
     .names{
@@ -267,8 +355,6 @@
     }
 
     .ayah{
-        font-size:19px;
+        font-size:20px;
     }
 }
-
-
