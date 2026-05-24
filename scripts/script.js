@@ -175,5 +175,5 @@ const heroVideo = document.querySelector(".hero-video");
 const cardVideo = document.querySelector(".card-video");
 
 // تبطي السرعة
-heroVideo.playbackRate = 0.4;
-cardVideo.playbackRate = 0.4;
+heroVideo.playbackRate = 0.10;
+cardVideo.playbackRate = 0.10;
