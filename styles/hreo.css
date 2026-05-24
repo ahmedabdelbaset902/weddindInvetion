@@ -13,8 +13,6 @@
     padding:0 20px;
 
     isolation:isolate;
-
- 
 }
 
 /* 🎥 video background */
@@ -27,19 +25,20 @@
     z-index:0;
 
     filter: brightness(.7) contrast(1.15) saturate(1.25);
-    transform: scale(1);
+    transform: translateZ(0);
 }
 
 /* 🌑 overlay */
 .overlay{
     position:absolute;
     inset:0;
-   background:
-    radial-gradient(circle at center,
-        rgba(255, 182, 193, .25),   /* baby pink خفيف في النص */
-        rgba(255, 105, 180, .45)); /* وردي أغمق شوية */
+    background:
+        radial-gradient(circle at center,
+            rgba(255, 182, 193, .25),
+            rgba(255, 105, 180, .45));
     z-index:1;
 }
+
 /* 💖 hearts */
 .hearts{
     position:absolute;
@@ -57,6 +56,7 @@
     filter: drop-shadow(0 0 8px rgba(255,50,80,.5));
     animation:floatHearts linear infinite;
 }
+
 /* =========================
    HERO CONTENT
 ========================= */
@@ -66,12 +66,11 @@
     z-index:3;
 
     max-width:850px;
-
     padding:30px;
 }
 
 /* =========================
-   ELEMENTS DEFAULT STATE
+   BASE STATE (FIX iOS ANIMATION)
 ========================= */
 
 .ayah,
@@ -79,27 +78,22 @@
 .names,
 .small-text,
 .date-box{
-
     opacity:0;
+    transform: translateZ(0);
+    will-change: transform, opacity;
 }
 
 /* =========================
    AYAH
 ========================= */
 
-.ayah {
-
-    font-size: 30px;
-
-    color: #000000;
-
-    margin-bottom: 12px;
-
-    line-height: 1.9;
-
-    font-weight: 900;
-
-    font-family: 'Amiri', serif;
+.ayah{
+    font-size:30px;
+    color:#000;
+    margin-bottom:12px;
+    line-height:1.9;
+    font-weight:900;
+    font-family:'Amiri', serif;
 }
 
 /* =========================
@@ -107,17 +101,11 @@
 ========================= */
 
 .tagline{
-
     letter-spacing:5px;
-
     color:#e29608;
-
     font-size:13px;
-
     margin-bottom:12px;
-
     text-transform:uppercase;
-
     font-family:'Poppins', sans-serif;
 
     text-shadow:
@@ -130,25 +118,13 @@
 ========================= */
 
 .names{
-
     font-size:clamp(58px,10vw,92px);
-
     font-family:'Great Vibes', cursive;
-
-    text-transform: capitalize;
-
-    color:#ffffff;
-
+    text-transform:capitalize;
+    color:#fff;
     margin:12px 0;
-
     letter-spacing:.5px;
-
     line-height:1.15;
-
-    position:relative;
-
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
 
     text-rendering:optimizeLegibility;
 
@@ -160,15 +136,10 @@
 
 /* & */
 .spans{
-
     color:#f5d08a;
-
     margin:0 10px;
-
     font-size:1.1em;
-
-    text-shadow:
-        0 5px 15px rgba(0,0,0,.5);
+    text-shadow:0 5px 15px rgba(0,0,0,.5);
 }
 
 /* =========================
@@ -176,15 +147,10 @@
 ========================= */
 
 .small-text{
-
     font-size:34px;
-
     font-family:'Great Vibes', cursive;
-
     color:#ffe4b5;
-
     line-height:1.7;
-
     margin-bottom:14px;
 
     text-shadow:
@@ -197,25 +163,16 @@
 ========================= */
 
 .date-box{
-
     display:inline-block;
-
     margin-top:14px;
-
     font-family:'Great Vibes', cursive;
-
     padding:10px 26px;
-
     border-radius:40px;
-
     color:#ffe8b3;
-
     font-size:30px;
 
     background: rgba(0,0,0,.35);
-
     border: 1px solid rgba(255,255,255,.15);
-
     backdrop-filter: blur(8px);
 
     box-shadow:
@@ -224,119 +181,87 @@
 }
 
 /* =========================
-   ULTRA SLOW START ANIMATIONS
+   ANIMATIONS TRIGGER
 ========================= */
 
 .main.show .ayah{
-
-    animation:
-        fadeUp 2.4s ease forwards;
-
+    animation: fadeUp 2.4s ease forwards;
     animation-delay:.6s;
+    animation-fill-mode: both;
 }
 
 .main.show .tagline{
-
-    animation:
-        fadeUp 2.4s ease forwards;
-
+    animation: fadeUp 2.4s ease forwards;
     animation-delay:1.2s;
+    animation-fill-mode: both;
 }
 
 .main.show .names{
-
-    animation:
-        fadeUpLuxury 2.8s ease forwards;
+    animation: fadeUpLuxury 2.8s ease forwards;
+    animation-fill-mode: both;
 }
 
 /* names delays */
-
-.main.show .names:nth-of-type(1){
-    animation-delay:1.8s;
-}
-
-.main.show .names:nth-of-type(2){
-    animation-delay:2.6s;
-}
-
-.main.show .names:nth-of-type(3){
-    animation-delay:3.4s;
-}
+.main.show .names:nth-of-type(1){ animation-delay:1.8s; }
+.main.show .names:nth-of-type(2){ animation-delay:2.6s; }
+.main.show .names:nth-of-type(3){ animation-delay:3.4s; }
 
 .main.show .small-text{
-
-    animation:
-        fadeUp 2.4s ease forwards;
-
+    animation: fadeUp 2.4s ease forwards;
     animation-delay:4.2s;
+    animation-fill-mode: both;
 }
 
 .main.show .date-box{
-
-    animation:
-        fadeUp 2.4s ease forwards;
-
+    animation: fadeUp 2.4s ease forwards;
     animation-delay:5s;
+    animation-fill-mode: both;
 }
 
 /* =========================
-   ANIMATIONS
+   KEYFRAMES (iOS SAFE VERSION)
 ========================= */
 
-/* Soft Fade Up */
-
 @keyframes fadeUp{
-
     from{
-
         opacity:0;
-
-        transform:
-            translateY(80px);
-
-        filter:blur(8px);
+        transform: translateY(80px);
     }
-
     to{
-
         opacity:1;
-
-        transform:
-            translateY(0);
-
-        filter:blur(0);
+        transform: translateY(0);
     }
 }
 
-/* Luxury Names */
-
 @keyframes fadeUpLuxury{
-
     from{
-
         opacity:0;
-
-        transform:
-            translateY(120px)
-            scale(.92);
-
-        filter:blur(12px);
+        transform: translateY(120px) scale(.92);
     }
-
     to{
-
         opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter:blur(0);
+        transform: translateY(0) scale(1);
     }
 }
 
 /* =========================
-   MOBILE
+   FLOAT HEARTS
+========================= */
+
+@keyframes floatHearts{
+    0%{
+        transform: translateY(0) translateX(0);
+        opacity:0;
+    }
+    10%{opacity:.8;}
+    100%{
+        transform: translateY(-110vh) translateX(30px);
+        opacity:0;
+    }
+}
+
+/* =========================
+   MOBILE FIX
 ========================= */
 
 @media(max-width:768px){
