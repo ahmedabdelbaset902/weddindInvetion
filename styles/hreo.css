@@ -25,7 +25,7 @@
     z-index:0;
 
     filter: brightness(.7) contrast(1.15) saturate(1.25);
-    transform: translateZ(0);
+    transform: translateZ(0) scale(1.02);
 }
 
 /* 🌑 overlay */
@@ -54,7 +54,7 @@
     color:#ff4d6d;
     opacity:.8;
     filter: drop-shadow(0 0 8px rgba(255,50,80,.5));
-    animation:floatHearts linear infinite;
+    animation: floatHearts linear infinite;
 }
 
 /* =========================
@@ -64,13 +64,12 @@
 .hero-content{
     position:relative;
     z-index:3;
-
     max-width:850px;
     padding:30px;
 }
 
 /* =========================
-   BASE STATE (FIX iOS ANIMATION)
+   BASE STATE (IMPORTANT FIX)
 ========================= */
 
 .ayah,
@@ -79,12 +78,14 @@
 .small-text,
 .date-box{
     opacity:0;
-    transform: translateZ(0);
+    transform: translateY(40px) scale(.98);
     will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
 }
 
 /* =========================
-   AYAH
+   AYAH (SMOOTH FIXED)
 ========================= */
 
 .ayah{
@@ -94,6 +95,9 @@
     line-height:1.9;
     font-weight:900;
     font-family:'Amiri', serif;
+
+    /* مهم جدًا: منع الفجأة */
+    transform: translateY(60px);
 }
 
 /* =========================
@@ -152,7 +156,6 @@
     color:#ffe4b5;
     line-height:1.7;
     margin-bottom:14px;
-
     text-shadow:
         0 2px 0 #7a5a2a,
         0 10px 25px rgba(0,0,0,.5);
@@ -181,64 +184,71 @@
 }
 
 /* =========================
-   ANIMATIONS TRIGGER
+   TRIGGER ANIMATION (SMOOTH FIX)
 ========================= */
 
 .main.show .ayah{
-    animation: fadeUp 2.4s ease forwards;
-    animation-delay:.6s;
+    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
+    animation-delay:.4s;
     animation-fill-mode: both;
 }
 
 .main.show .tagline{
-    animation: fadeUp 2.4s ease forwards;
-    animation-delay:1.2s;
+    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
+    animation-delay:1s;
     animation-fill-mode: both;
 }
 
 .main.show .names{
-    animation: fadeUpLuxury 2.8s ease forwards;
+    animation: fadeUpLuxury 2.2s cubic-bezier(.22,1,.36,1) forwards;
     animation-fill-mode: both;
 }
 
-/* names delays */
-.main.show .names:nth-of-type(1){ animation-delay:1.8s; }
-.main.show .names:nth-of-type(2){ animation-delay:2.6s; }
-.main.show .names:nth-of-type(3){ animation-delay:3.4s; }
+.main.show .names:nth-of-type(1){ animation-delay:1.6s; }
+.main.show .names:nth-of-type(2){ animation-delay:2.2s; }
+.main.show .names:nth-of-type(3){ animation-delay:2.8s; }
 
 .main.show .small-text{
-    animation: fadeUp 2.4s ease forwards;
-    animation-delay:4.2s;
+    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
+    animation-delay:3.6s;
     animation-fill-mode: both;
 }
 
 .main.show .date-box{
-    animation: fadeUp 2.4s ease forwards;
-    animation-delay:5s;
+    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
+    animation-delay:4.4s;
     animation-fill-mode: both;
 }
 
 /* =========================
-   KEYFRAMES (iOS SAFE VERSION)
+   KEYFRAMES (ULTRA SMOOTH)
 ========================= */
 
-@keyframes fadeUp{
-    from{
+@keyframes fadeUpSmooth{
+    0%{
         opacity:0;
-        transform: translateY(80px);
+        transform: translateY(50px) scale(.98);
     }
-    to{
+    60%{
+        opacity:.8;
+        transform: translateY(-5px) scale(1.01);
+    }
+    100%{
         opacity:1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
 @keyframes fadeUpLuxury{
-    from{
+    0%{
         opacity:0;
-        transform: translateY(120px) scale(.92);
+        transform: translateY(80px) scale(.9);
     }
-    to{
+    70%{
+        opacity:.9;
+        transform: translateY(-5px) scale(1.02);
+    }
+    100%{
         opacity:1;
         transform: translateY(0) scale(1);
     }
@@ -266,20 +276,8 @@
 
 @media(max-width:768px){
 
-    .names{
-        font-size:54px;
-    }
-
-    .small-text{
-        font-size:18px;
-    }
-
-    .date-box{
-        font-size:20px;
-        padding:8px 18px;
-    }
-
-    .ayah{
-        font-size:20px;
-    }
+    .names{ font-size:54px; }
+    .small-text{ font-size:18px; }
+    .date-box{ font-size:20px; padding:8px 18px; }
+    .ayah{ font-size:20px; }
 }
