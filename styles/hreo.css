@@ -38,7 +38,6 @@
             rgba(255, 105, 180, .45));
     z-index:1;
 }
-
 /* 💖 hearts */
 .hearts{
     position:absolute;
@@ -54,9 +53,8 @@
     color:#ff4d6d;
     opacity:.8;
     filter: drop-shadow(0 0 8px rgba(255,50,80,.5));
-    animation: floatHearts linear infinite;
+    animation:floatHearts linear infinite;
 }
-
 /* =========================
    HERO CONTENT
 ========================= */
@@ -64,12 +62,14 @@
 .hero-content{
     position:relative;
     z-index:3;
+
     max-width:850px;
+
     padding:30px;
 }
 
 /* =========================
-   BASE STATE (IMPORTANT FIX)
+   ELEMENTS DEFAULT STATE
 ========================= */
 
 .ayah,
@@ -77,27 +77,27 @@
 .names,
 .small-text,
 .date-box{
+
     opacity:0;
-    transform: translateY(40px) scale(.98);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
 }
 
 /* =========================
-   AYAH (SMOOTH FIXED)
+   AYAH
 ========================= */
 
-.ayah{
-    font-size:25px;
-    color:#000;
-    margin-bottom:12px;
-    line-height:1.9;
-    font-weight:900;
-    font-family:'Amiri', serif;
+.ayah {
 
-    /* مهم جدًا: منع الفجأة */
-    transform: translateY(60px);
+    font-size: 25px;
+
+    color: #000000;
+
+    margin-bottom: 12px;
+
+    line-height: 1.9;
+
+    font-weight: 900;
+
+    font-family: 'Amiri', serif;
 }
 
 /* =========================
@@ -105,11 +105,17 @@
 ========================= */
 
 .tagline{
+
     letter-spacing:5px;
+
     color:#e29608;
+
     font-size:13px;
+
     margin-bottom:12px;
+
     text-transform:uppercase;
+
     font-family:'Poppins', sans-serif;
 
     text-shadow:
@@ -122,13 +128,25 @@
 ========================= */
 
 .names{
+
     font-size:clamp(58px,10vw,92px);
+
     font-family:'Great Vibes', cursive;
-    text-transform:capitalize;
-    color:#fff;
+
+    text-transform: capitalize;
+
+    color:#ffffff;
+
     margin:12px 0;
+
     letter-spacing:.5px;
+
     line-height:1.15;
+
+    position:relative;
+
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
 
     text-rendering:optimizeLegibility;
 
@@ -140,10 +158,15 @@
 
 /* & */
 .spans{
+
     color:#f5d08a;
+
     margin:0 10px;
+
     font-size:1.1em;
-    text-shadow:0 5px 15px rgba(0,0,0,.5);
+
+    text-shadow:
+        0 5px 15px rgba(0,0,0,.5);
 }
 
 /* =========================
@@ -151,11 +174,17 @@
 ========================= */
 
 .small-text{
+
     font-size:34px;
+
     font-family:'Great Vibes', cursive;
+
     color:#ffe4b5;
+
     line-height:1.7;
+
     margin-bottom:14px;
+
     text-shadow:
         0 2px 0 #7a5a2a,
         0 10px 25px rgba(0,0,0,.5);
@@ -166,16 +195,25 @@
 ========================= */
 
 .date-box{
+
     display:inline-block;
+
     margin-top:14px;
+
     font-family:'Great Vibes', cursive;
+
     padding:10px 26px;
+
     border-radius:40px;
+
     color:#ffe8b3;
+
     font-size:30px;
 
     background: rgba(0,0,0,.35);
+
     border: 1px solid rgba(255,255,255,.15);
+
     backdrop-filter: blur(8px);
 
     box-shadow:
@@ -184,100 +222,137 @@
 }
 
 /* =========================
-   TRIGGER ANIMATION (SMOOTH FIX)
+   ULTRA SLOW START ANIMATIONS
 ========================= */
 
 .main.show .ayah{
-    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
-    animation-delay:.4s;
-    animation-fill-mode: both;
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:.2s;
 }
 
 .main.show .tagline{
-    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
-    animation-delay:1s;
-    animation-fill-mode: both;
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:1.2s;
 }
 
 .main.show .names{
-    animation: fadeUpLuxury 2.2s cubic-bezier(.22,1,.36,1) forwards;
-    animation-fill-mode: both;
+
+    animation:
+        fadeUpLuxury 2.8s ease forwards;
 }
 
-.main.show .names:nth-of-type(1){ animation-delay:1.6s; }
-.main.show .names:nth-of-type(2){ animation-delay:2.2s; }
-.main.show .names:nth-of-type(3){ animation-delay:2.8s; }
+/* names delays */
+
+.main.show .names:nth-of-type(1){
+    animation-delay:1.8s;
+}
+
+.main.show .names:nth-of-type(2){
+    animation-delay:2.6s;
+}
+
+.main.show .names:nth-of-type(3){
+    animation-delay:3.4s;
+}
 
 .main.show .small-text{
-    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
-    animation-delay:3.6s;
-    animation-fill-mode: both;
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:4.2s;
 }
 
 .main.show .date-box{
-    animation: fadeUpSmooth 1.8s cubic-bezier(.22,1,.36,1) forwards;
-    animation-delay:4.4s;
-    animation-fill-mode: both;
+
+    animation:
+        fadeUp 2.4s ease forwards;
+
+    animation-delay:5s;
 }
 
 /* =========================
-   KEYFRAMES (ULTRA SMOOTH)
+   ANIMATIONS
 ========================= */
 
-@keyframes fadeUpSmooth{
-    0%{
+/* Soft Fade Up */
+
+@keyframes fadeUp{
+
+    from{
+
         opacity:0;
-        transform: translateY(50px) scale(.98);
+
+        transform:
+            translateY(80px);
+
+        filter:blur(8px);
     }
-    60%{
-        opacity:.8;
-        transform: translateY(-5px) scale(1.01);
-    }
-    100%{
+
+    to{
+
         opacity:1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0);
+
+        filter:blur(0);
     }
 }
+
+/* Luxury Names */
 
 @keyframes fadeUpLuxury{
-    0%{
+
+    from{
+
         opacity:0;
-        transform: translateY(80px) scale(.9);
+
+        transform:
+            translateY(120px)
+            scale(.92);
+
+        filter:blur(12px);
     }
-    70%{
-        opacity:.9;
-        transform: translateY(-5px) scale(1.02);
-    }
-    100%{
+
+    to{
+
         opacity:1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:blur(0);
     }
 }
 
 /* =========================
-   FLOAT HEARTS
-========================= */
-
-@keyframes floatHearts{
-    0%{
-        transform: translateY(0) translateX(0);
-        opacity:0;
-    }
-    10%{opacity:.8;}
-    100%{
-        transform: translateY(-110vh) translateX(30px);
-        opacity:0;
-    }
-}
-
-/* =========================
-   MOBILE FIX
+   MOBILE
 ========================= */
 
 @media(max-width:768px){
 
-    .names{ font-size:54px; }
-    .small-text{ font-size:18px; }
-    .date-box{ font-size:20px; padding:8px 18px; }
-    .ayah{ font-size:20px; }
+    .names{
+        font-size:54px;
+    }
+
+    .small-text{
+        font-size:18px;
+    }
+
+    .date-box{
+        font-size:20px;
+        padding:8px 18px;
+    }
+
+    .ayah{
+        font-size:20px;
+    }
 }
